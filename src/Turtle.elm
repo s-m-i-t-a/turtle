@@ -1,4 +1,4 @@
-module Turtle exposing (Path, setStartPosition, resetHeading, turn, left, right, forward, move)
+module Turtle exposing (Turtle, Path, setStartPosition, resetHeading, turn, left, right, forward, move)
 
 import Data.Point exposing (Point, make, next)
 import Data.Polar as Polar exposing (Polar)
@@ -10,16 +10,20 @@ type alias Heading =
 
 
 type alias Path =
-    List ( Point, Heading )
+    List Point
+
+
+type alias Turtle =
+    ( Heading, Path )
 
 
 type alias Translate =
     Polar -> Polar
 
 
-setStartPosition : Float -> Float -> Path
+setStartPosition : Float -> Float -> Turtle
 setStartPosition x y =
-    [ ( make x y, resetHeading ) ]
+    ( resetHeading, [ make x y ] )
 
 
 resetHeading : Polar
@@ -49,20 +53,21 @@ forward distance polar =
     Polar.setR distance polar
 
 
-move : Translate -> Path -> Path
-move translate path =
+move : Translate -> Turtle -> Turtle
+move translate ( heading, path ) =
     case path of
-        ( point, heading ) :: _ ->
+        point :: _ ->
             let
                 new =
                     translate heading
             in
                 ( new
+                , (new
                     |> Vector.fromPolar
                     |> next point
-                , new
-                )
+                  )
                     :: path
+                )
 
         [] ->
-            []
+            ( heading, [] )
