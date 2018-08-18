@@ -30,4 +30,9 @@ suite =
                                     [ \rv -> (Expect.equal ((len - n) + 1) (List.length rv))
                                     , \rv -> rv |> List.head |> Expect.equal (Just <| List.take n list)
                                     ]
+        , test "should create 2-element list" <|
+            \_ ->
+                [ 1, 2, 3, 4, 5 ]
+                    |> window 2
+                    |> Expect.equal [ [ 1, 2 ], [ 2, 3 ], [ 3, 4 ], [ 4, 5 ] ]
         ]
