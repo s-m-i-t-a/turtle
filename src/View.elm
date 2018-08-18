@@ -1,7 +1,8 @@
 module View exposing (view)
 
-import Html exposing (Html, h1, div, text)
+import Html exposing (Html, header, footer, main_, h1, div, text)
 import Html.Attributes exposing (class)
+import Draw
 import Model exposing (Model)
 import Types exposing (Msg(..))
 
@@ -12,25 +13,33 @@ view model =
         []
         [ head model
         , body model
-        , footer model
+        , footer_ model
         ]
 
 
 head : Model -> Html Msg
 head model =
-    div
-        [ class "grid-container" ]
+    header
+        [ class "pure-g" ]
         [ div
-            [ class "grid-x grid-margin-x" ]
-            [ h1 [ class "cell" ] [ text "Turtle path visualization" ] ]
+            [ class "pure-u-1" ]
+            [ h1 [] [ text "Turtle path visualization" ] ]
         ]
 
 
 body : Model -> Html Msg
 body model =
-    div [] [ text "SVG image" ]
+    main_
+        [ class "pure-g" ]
+        [ div
+            [ class "pure-u-1-3" ]
+            [ text "SIDE" ]
+        , div
+            [ class "pure-u-2-3" ]
+            [ Draw.view model.turtle ]
+        ]
 
 
-footer : Model -> Html Msg
-footer model =
-    div [] []
+footer_ : Model -> Html Msg
+footer_ model =
+    footer [ class "pure-g" ] []

@@ -1,4 +1,4 @@
-module Turtle exposing (Turtle, Path, setStartPosition, resetHeading, turn, left, right, forward, move)
+module Turtle exposing (Turtle, Heading, Path, setStartPosition, resetHeading, turn, left, right, forward, move)
 
 import Data.Point exposing (Point, make, next)
 import Data.Polar as Polar exposing (Polar)
