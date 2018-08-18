@@ -1,4 +1,4 @@
-module Data.Point exposing (Point, make, getX, getY, next)
+module Data.Point exposing (Point, make, getX, getY, next, zero)
 
 import Data.Vector as Vector exposing (Vector)
 
@@ -8,6 +8,11 @@ import Data.Vector as Vector exposing (Vector)
 
 type Point
     = Point Float Float
+
+
+zero : Point
+zero =
+    Point 0.0 0.0
 
 
 make : Float -> Float -> Point
