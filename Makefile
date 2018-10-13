@@ -3,11 +3,11 @@
 .SUFFIXES: .elm .js
 
 build:
-	elm-make --warn src/Main.elm --output=build/main.js
+	elm make src/Main.elm --output=build/main.js
 
 
 watch:
-	elm-live --dir=build --output=build/main.js src/Main.elm --pushstate --open --debug
+	elm reactor
 
 
 gh-pages: build

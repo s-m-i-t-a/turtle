@@ -1,9 +1,9 @@
-module List.ExtraTests exposing (..)
+module List.ExtraTests exposing (suite)
 
 import Expect
-import Test exposing (..)
 import Fuzz exposing (Fuzzer, int, intRange, list)
 import List.Extra exposing (window)
+import Test exposing (..)
 
 
 suite : Test
@@ -16,20 +16,21 @@ suite =
                     len =
                         List.length list
                 in
-                    if n <= 0 || n > len then
-                        list
-                            |> window n
-                            |> Expect.equal []
-                    else
-                        let
-                            rv =
-                                window n list
-                        in
-                            rv
-                                |> Expect.all
-                                    [ \rv -> (Expect.equal ((len - n) + 1) (List.length rv))
-                                    , \rv -> rv |> List.head |> Expect.equal (Just <| List.take n list)
-                                    ]
+                if n <= 0 || n > len then
+                    list
+                        |> window n
+                        |> Expect.equal []
+
+                else
+                    let
+                        rv =
+                            window n list
+                    in
+                    rv
+                        |> Expect.all
+                            [ \rv_ -> Expect.equal ((len - n) + 1) (List.length rv_)
+                            , \rv_ -> rv_ |> List.head |> Expect.equal (Just <| List.take n list)
+                            ]
         , test "should create 2-element list" <|
             \_ ->
                 [ 1, 2, 3, 4, 5 ]
