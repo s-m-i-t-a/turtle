@@ -1,16 +1,16 @@
 module Main exposing (main)
 
-import Html
-import View exposing (view)
-import Update exposing (update)
+import Browser
 import Model exposing (Model, init)
 import Types exposing (Msg(..))
+import Update exposing (update)
+import View exposing (view)
 
 
-main : Program Never Model Msg
+main : Program () Model Msg
 main =
-    Html.program
-        { init = ( init, Cmd.none )
+    Browser.element
+        { init = \_ -> ( init, Cmd.none )
         , view = view
         , update = update
         , subscriptions = \m -> Sub.none

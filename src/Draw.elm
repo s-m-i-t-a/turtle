@@ -1,12 +1,12 @@
 module Draw exposing (view)
 
-import Html exposing (Html)
-import Svg exposing (Svg, svg)
-import Svg.Attributes exposing (width, height, viewBox, x1, x2, y1, y2, stroke)
-import Data.Line exposing (Line, make, getX, getY, zero)
+import Data.Line exposing (Line, getX, getY, make, zero)
 import Data.Point as Point
+import Html exposing (Html)
 import List.Extra exposing (window)
-import Turtle exposing (Turtle, Path)
+import Svg exposing (Svg, svg)
+import Svg.Attributes exposing (height, stroke, viewBox, width, x1, x2, y1, y2)
+import Turtle exposing (Path, Turtle)
 import Types exposing (Msg(..))
 
 
@@ -31,21 +31,21 @@ line l =
             getX l
 
         x1_ =
-            x |> Point.getX |> toString
+            x |> Point.getX |> String.fromFloat
 
         y1_ =
-            x |> Point.getY |> toString
+            x |> Point.getY |> String.fromFloat
 
         y =
             getY l
 
         x2_ =
-            y |> Point.getX |> toString
+            y |> Point.getX |> String.fromFloat
 
         y2_ =
-            y |> Point.getY |> toString
+            y |> Point.getY |> String.fromFloat
     in
-        Svg.line [ x1 x1_, y1 y1_, x2 x2_, y2 y2_, stroke "black" ] []
+    Svg.line [ x1 x1_, y1 y1_, x2 x2_, y2 y2_, stroke "black" ] []
 
 
 toLines : Path -> Lines
